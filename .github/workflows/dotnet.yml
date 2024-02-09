@@ -13,8 +13,6 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: environment
-        description: Select the environment
       choice:
         type: choice
         description: select the environment
