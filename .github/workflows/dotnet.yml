@@ -9,41 +9,35 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
- name: Environment-based Workflow
-
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment'
-        required: true
-        options: ['DEV', 'QA', 'PROD']
-
+        type: environment
+        description: Select the environment
+      boolean:
+        type: boolean
+        description: True or False
+      choice:
+        type: choice
+        description: Make a choice
+        options:
+        - Dev
+        - PROD
+        - QA
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      # Run actions based on the selected environment
-      - name: Run actions based on environment
-        run: |
-          case "${{ github.event.inputs.environment }}" in
-            DEV)
-              echo "Running actions for DEV environment"
-              # Add your actions specific to DEV environment
-              ;;
-            QA)
-              echo "Running actions for QA environment"
-              # Add your actions specific to QA environment
-              ;;
-            PROD)
-              echo "Running actions for PROD environment"
-              # Add your actions specific to PROD environment
-              ;;
-          esac
+      - name: greet
+        run: | 
+          echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
+          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
+          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
+     
 
 jobs:
   build:
