@@ -12,7 +12,6 @@ on:
 on:
   workflow_dispatch:
     inputs:
-      environment:
       choice:
         type: choice
         description: select the environment
