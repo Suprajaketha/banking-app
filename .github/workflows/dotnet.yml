@@ -5,12 +5,7 @@ name: .NET
 
 on:
  workflow_dispatch:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
-    inputs:
+   inputs:
       choice:
         type: choice
         description: select the environment
@@ -32,8 +27,8 @@ jobs:
           echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
      
 
-jobs:
-  build:
+
+  deploy:
 
     runs-on: ubuntu-latest
 
